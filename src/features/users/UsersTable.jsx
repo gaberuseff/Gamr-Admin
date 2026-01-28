@@ -20,7 +20,7 @@ import {
 import { useCallback, useRef, useState } from "react";
 import { HiTrash } from "react-icons/hi";
 import { HiNoSymbol } from "react-icons/hi2";
-import Center from "../../ui/center";
+import Center from "../../ui/Center";
 import useUpdateUser from "./useUpdateUser";
 import useUsers from "./useUsers";
 import useDeleteUser from "./useDeleteUser";
