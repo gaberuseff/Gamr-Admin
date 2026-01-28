@@ -1,9 +1,7 @@
+import SettingsForm from "../features/settings/SettingsForm"
+
 function Settings() {
-    return (
-        <div>
-            <h1>Settings</h1>
-        </div>
-    )
+    return <SettingsForm />
 }
 
 export default Settings

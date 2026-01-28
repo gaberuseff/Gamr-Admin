@@ -1,8 +1,12 @@
+import OrdersTable from "../features/orders/OrdersTable"
+import OrdersTableOperations from "../features/orders/OrdersTableOperations"
+
 function Orders() {
     return (
-        <div>
-            <h1>Orders</h1>
-        </div>
+        <>
+            <OrdersTableOperations />
+            <OrdersTable />
+        </>
     )
 }
 

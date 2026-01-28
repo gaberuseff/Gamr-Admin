@@ -24,7 +24,7 @@ import { HiOutlinePencil, HiOutlineTrash } from "react-icons/hi";
 
 import Center from "../../ui/Center";
 import Error from "../../ui/Error";
-import { formatCurrency } from "../../utils/helpers";
+import { formateCurrency } from "../../utils/helpers";
 import useDeleteProduct from "./useDeleteProduct";
 import useProducts from "./useProducts";
 import EditProduct from "./EditProduct";
@@ -107,14 +107,14 @@ function ProductsTable() {
             case "price": {
                 const prices = product.sizes?.map((size) => size.price) || [];
                 if (prices.length === 0) return "غير محدد";
-                if (prices.length === 1) return formatCurrency(prices[0]);
+                if (prices.length === 1) return formateCurrency(prices[0]);
 
                 const minPrice = Math.min(...prices);
                 const maxPrice = Math.max(...prices);
                 return (
                     <div className="flex flex-col">
                         <p className="text-bold text-sm">
-                            {formatCurrency(minPrice)} - {formatCurrency(maxPrice)}
+                            {formateCurrency(minPrice)} - {formateCurrency(maxPrice)}
                         </p>
                     </div>
                 );
