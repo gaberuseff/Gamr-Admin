@@ -1,3 +1,5 @@
+import { authStorage } from "../utils/authStorage";
+
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
 const SUPABASE_KEY = import.meta.env.VITE_SUPABASE_KEY;
 const BUCKET_NAME = 'product-images';
@@ -15,7 +17,7 @@ export async function uploadProductImage(file, productName = 'product') {
             method: 'POST',
             headers: {
                 'apikey': SUPABASE_KEY,
-                'Authorization': `Bearer ${SUPABASE_KEY}`,
+                'Authorization': `Bearer ${authStorage.getAccessToken()}`,
                 'Content-Type': file.type,
             },
             body: file
@@ -48,7 +50,7 @@ export async function deleteProductImage(imageUrl) {
             method: 'DELETE',
             headers: {
                 'apikey': SUPABASE_KEY,
-                'Authorization': `Bearer ${SUPABASE_KEY}`,
+                'Authorization': `Bearer ${authStorage.getAccessToken()}`,
             }
         }
     );

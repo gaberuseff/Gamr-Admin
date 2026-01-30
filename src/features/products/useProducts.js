@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "react-router-dom";
 import { getProducts } from "../../services/apiProducts";
 import { ITEMS_PER_PAGE } from "../../utils/constants";
@@ -15,7 +15,7 @@ function useProducts() {
     } = useQuery({
         queryKey: ['products', currentPage],
         queryFn: () => getProducts(currentPage),
-        keepPreviousData: true, // Keep previous data while fetching new page
+        placeholderData: keepPreviousData, // ✅ Updated from deprecated keepPreviousData option
     });
 
     return {

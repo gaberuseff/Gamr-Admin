@@ -1,3 +1,4 @@
+import { authStorage } from "../utils/authStorage";
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
 const SUPABASE_KEY = import.meta.env.VITE_SUPABASE_KEY;
@@ -8,7 +9,7 @@ export const getDashboardStats = async (days = 7) => {
         headers: {
             "Content-Type": "application/json",
             "apikey": SUPABASE_KEY,
-            "Authorization": `Bearer ${SUPABASE_KEY}`,
+            "Authorization": `Bearer ${authStorage.getAccessToken()}`,
             "Accept": "application/vnd.pgrst.object+json",
         },
         body: JSON.stringify({
@@ -26,7 +27,7 @@ export const getOrdersStatusChart = async (days = 7) => {
         headers: {
             "Content-Type": "application/json",
             "apikey": SUPABASE_KEY,
-            "Authorization": `Bearer ${SUPABASE_KEY}`,
+            "Authorization": `Bearer ${authStorage.getAccessToken()}`,
         },
         body: JSON.stringify({
             days_interval: Number(days)
@@ -43,7 +44,7 @@ export const getTopSellingProducts = async (days = 7, limit = 5) => {
         headers: {
             "Content-Type": "application/json",
             "apikey": SUPABASE_KEY,
-            "Authorization": `Bearer ${SUPABASE_KEY}`,
+            "Authorization": `Bearer ${authStorage.getAccessToken()}`,
         },
         body: JSON.stringify({
             days_interval: Number(days),

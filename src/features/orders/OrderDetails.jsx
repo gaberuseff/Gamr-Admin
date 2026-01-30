@@ -63,7 +63,7 @@ function OrderDetails() {
 
             <div className="flex items-center gap-4">
                 {
-                    order.status == 'received' ? (
+                    order.status === 'received' ? (
                         <Button color="primary"
                             isDisabled={order.status === "shipped"
                                 || order.status === "cancelled"}
@@ -73,7 +73,7 @@ function OrderDetails() {
                             تأكيد الطلب
                         </Button>
                     ) : (
-                        order.status == 'confirmed' ? (
+                        order.status === 'confirmed' ? (
                             <Button color="primary"
                                 isDisabled={order.status === "shipped"
                                     || order.status === "cancelled"}
@@ -83,12 +83,12 @@ function OrderDetails() {
                                 تأكيد التسليم
                             </Button>
                         ) : (
-                            order.status == 'shipped' ? (
+                            order.status === 'shipped' ? (
                                 <Button color="primary"
                                     isDisabled={order.status === "shipped"
                                         || order.status === "cancelled"}>تم الشحن</Button>
                             ) : (
-                                order.status == 'cancelled' ? (
+                                order.status === 'cancelled' ? (
                                     <Button color="primary" isDisabled={order.status === "shipped"
                                         || order.status === "cancelled"}>تم الإلغاء</Button>
                                 ) : (

@@ -1,7 +1,9 @@
 import supabase from "./supabase";
+import { authStorage } from "../utils/authStorage";
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
 const SUPABASE_KEY = import.meta.env.VITE_SUPABASE_KEY;
+
 
 export const createUser = async (userData) => {
     const { email, password, role, name, phone } = userData;
@@ -27,11 +29,10 @@ export const createUser = async (userData) => {
 }
 
 export const getAllUsers = async () => {
-    const response = await fetch(`${SUPABASE_URL}/rest/v1/profiles?select=*`, {
+    const response = await fetch(`${SUPABASE_URL}/rest/v1/profiles?select=*&order=created_at.desc`, {
         headers: {
             "apikey": SUPABASE_KEY,
-            "Authorization": `Bearer ${SUPABASE_KEY}`,
-            "order": "created_at.desc"
+            "Authorization": `Bearer ${authStorage.getAccessToken()}`,
         }
     })
 
@@ -41,10 +42,8 @@ export const getAllUsers = async () => {
 }
 
 export const manageUser = async ({ userId, action }) => {
-    const { authStorage } = await import("../utils/authStorage");
-    const session = authStorage.getSession();
-
-    if (!session?.access_token) {
+    const token = authStorage.getAccessToken();
+    if (!token) {
         throw new Error("لا يوجد جلسة نشطة");
     }
 
@@ -55,7 +54,7 @@ export const manageUser = async ({ userId, action }) => {
             headers: {
                 "apikey": SUPABASE_KEY,
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${session.access_token}`,
+                "Authorization": `Bearer ${authStorage.getAccessToken()}`,
             },
             body: JSON.stringify({ userId, action }),
         }
@@ -70,10 +69,8 @@ export const manageUser = async ({ userId, action }) => {
 };
 
 export const deleteUser = async (userId) => {
-    const { authStorage } = await import("../utils/authStorage");
-    const session = authStorage.getSession();
-
-    if (!session?.access_token) {
+    const token = authStorage.getAccessToken();
+    if (!token) {
         throw new Error("لا يوجد جلسة نشطة");
     }
 
@@ -84,7 +81,7 @@ export const deleteUser = async (userId) => {
             headers: {
                 "apikey": SUPABASE_KEY,
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${session.access_token}`,
+                "Authorization": `Bearer ${authStorage.getAccessToken()}`,
             },
             body: JSON.stringify({ userId, action: "delete" }),
         }

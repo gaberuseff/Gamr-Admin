@@ -1,4 +1,5 @@
 import { ITEMS_PER_PAGE } from "../utils/constants";
+import { authStorage } from "../utils/authStorage";
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
 const SUPABASE_KEY = import.meta.env.VITE_SUPABASE_KEY;
@@ -13,7 +14,7 @@ export async function getProducts(page = 1) {
         {
             headers: {
                 'apikey': SUPABASE_KEY,
-                'Authorization': `Bearer ${SUPABASE_KEY}`,
+                'Authorization': `Bearer ${authStorage.getAccessToken()}`,
                 'Range': `${from}-${to}`,
                 'Prefer': 'count=exact'
             }
@@ -42,7 +43,7 @@ export async function createProduct(productData) {
             method: 'POST',
             headers: {
                 'apikey': SUPABASE_KEY,
-                'Authorization': `Bearer ${SUPABASE_KEY}`,
+                'Authorization': `Bearer ${authStorage.getAccessToken()}`,
                 'Content-Type': 'application/json',
                 'Prefer': 'return=representation'
             },
@@ -67,7 +68,7 @@ export async function updateProduct(productId, productData) {
             method: 'PATCH',
             headers: {
                 'apikey': SUPABASE_KEY,
-                'Authorization': `Bearer ${SUPABASE_KEY}`,
+                'Authorization': `Bearer ${authStorage.getAccessToken()}`,
                 'Content-Type': 'application/json',
                 'Prefer': 'return=representation'
             },
@@ -97,7 +98,7 @@ export async function deleteProduct(productId) {
             method: 'DELETE',
             headers: {
                 'apikey': SUPABASE_KEY,
-                'Authorization': `Bearer ${SUPABASE_KEY}`,
+                'Authorization': `Bearer ${authStorage.getAccessToken()}`,
                 'Prefer': 'return=representation'
             }
         }

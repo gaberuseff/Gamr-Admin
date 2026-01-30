@@ -1,3 +1,4 @@
+import DeleteOrdersBtn from "../features/orders/DeleteOrdersBtn"
 import OrdersTable from "../features/orders/OrdersTable"
 import OrdersTableOperations from "../features/orders/OrdersTableOperations"
 
@@ -6,6 +7,7 @@ function Orders() {
         <>
             <OrdersTableOperations />
             <OrdersTable />
+            <DeleteOrdersBtn />
         </>
     )
 }

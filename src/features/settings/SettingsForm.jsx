@@ -1,4 +1,4 @@
-import { Form, Input, Button, Checkbox, Spinner } from "@heroui/react";
+import { Form, Input, Button, Checkbox, Spinner, Card } from "@heroui/react";
 import { useState } from "react";
 import useSettings from "./useSettings";
 import Center from "../../ui/Center";
@@ -26,7 +26,7 @@ function SettingsForm() {
     const { shipping_price, free_shipping, is_working } = settings;
 
     return (
-        <div className="p-4">
+        <Card className="p-6" shadow="none">
             <Form
                 className="w-full max-w-md flex flex-col gap-4 "
                 onReset={() => setAction("reset")}
@@ -69,7 +69,7 @@ function SettingsForm() {
                     </Button>
                 </div>
             </Form>
-        </div>
+        </Card>
     )
 }
 

@@ -12,7 +12,7 @@ function useLogout() {
         mutationFn: logoutApi,
         onSuccess: () => {
             authStorage.clearSession();
-            queryClient.resetQueries();
+            queryClient.clear(); // مسح جميع البيانات من الكاش
             toast.success("تم تسجيل الخروج");
             navigate("/login");
         },

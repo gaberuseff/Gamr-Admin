@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "react-router-dom";
 import { getOrders } from "../../services/apiOrders";
 import { ORDERS_PER_PAGE } from "../../utils/constants";
@@ -16,7 +16,7 @@ function useOrders() {
     } = useQuery({
         queryKey: ["orders", status, sortBy, search, currentPage],
         queryFn: () => getOrders({ status, sortBy, search, page: currentPage }),
-        keepPreviousData: true,
+        placeholderData: keepPreviousData, // ✅ Updated from deprecated keepPreviousData option
     });
 
     return {

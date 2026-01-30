@@ -50,10 +50,10 @@ function AddProduct() {
 
         data.sizes = sizes.map(s => ({
             size: s.size,
-            price: parseFloat(s.price)
+            price: Number(s.price)
         }));
         data.in_stock = inStock;
-        data.discount = parseFloat(data.discount) || 0;
+        data.discount = Number(data.discount) || 0;
 
         // رفع الصور أولاً
         if (images.length > 0) {

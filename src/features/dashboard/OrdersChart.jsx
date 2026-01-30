@@ -1,5 +1,5 @@
 import { Card } from "@heroui/react";
-import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
+import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 
 const COLORS = {
     received: "#f59e0b",
@@ -58,81 +58,92 @@ function OrdersChart({ ordersStatusChart }) {
             </div>
 
             {/* Chart and Legend Side by Side */}
-            <div className="flex items-center justify-between gap-4">
-                {/* Legend beside chart */}
-                <div className="flex flex-col gap-4">
-                    {ordersData.map((item) => (
-                        <div key={item.status} className="flex items-center gap-3">
-                            <div
-                                className="w-4 h-4 rounded-full"
-                                style={{ backgroundColor: COLORS[item.status] }}
-                            />
-                            <span className="text-sm font-medium text-text whitespace-nowrap">
-                                {item.name}
-                            </span>
-                        </div>
-                    ))}
-                </div>
-
-                {/* Chart */}
-                <div className="flex-1">
-                    <ResponsiveContainer width="100%" height={250}>
-                        <PieChart>
-                            <Pie
-                                data={ordersData}
-                                cx="50%"
-                                cy="50%"
-                                labelLine={false}
-                                label={renderCustomLabel}
-                                outerRadius={110}
-                                innerRadius={65}
-                                fill="#8884d8"
-                                dataKey="value"
-                                paddingAngle={3}
-                            >
-                                {ordersData.map((entry, index) => (
-                                    <Cell key={`cell-${index}`} fill={COLORS[entry.status]} />
-                                ))}
-                            </Pie>
-                            <Tooltip
-                                content={({ active, payload }) => {
-                                    if (active && payload && payload.length) {
-                                        const data = payload[0];
-                                        return (
-                                            <div className="bg-white px-4 py-2 rounded-lg shadow-lg border border-border">
-                                                <p className="text-sm font-semibold text-text">{data.name}</p>
-                                                <p className="text-sm font-bold" style={{ color: data.payload.fill }}>
-                                                    {data.value} طلب ({((data.value / totalOrders) * 100).toFixed(1)}%)
-                                                </p>
-                                            </div>
-                                        );
-                                    }
-                                    return null;
-                                }}
-                            />
-                        </PieChart>
-                    </ResponsiveContainer>
-                </div>
-            </div>
-
-            {/* Statistics Summary */}
-            <div className="grid grid-cols-2 gap-4">
-                {ordersData.map((item) => (
-                    <div
-                        key={item.status}
-                        className="flex items-center justify-between p-3 rounded-lg bg-bg"
-                    >
-                        <div className="flex items-center gap-2">
-                            <div
-                                className="w-3 h-3 rounded-full"
-                                style={{ backgroundColor: COLORS[item.status] }}
-                            />
-                            <span className="text-sm font-medium text-text">{item.name}</span>
-                        </div>
-                        <span className="text-lg font-bold text-text">{item.value}</span>
+            {ordersData.length === 0 || totalOrders === 0 ? (
+                <div className="flex items-center justify-center h-64">
+                    <div className="text-center">
+                        <p className="text-lg font-semibold text-text-secondary">لا توجد بيانات حتى الآن</p>
+                        <p className="text-sm text-text-secondary mt-2">لم يتم تسجيل أي طلبات في الفترة المحددة</p>
                     </div>
-                ))}
-            </div>
+                </div>
+            ) : (
+                <>
+                    <div className="flex items-center justify-between gap-4">
+                        {/* Legend beside chart */}
+                        <div className="flex flex-col gap-4">
+                            {ordersData.map((item) => (
+                                <div key={item.status} className="flex items-center gap-3">
+                                    <div
+                                        className="w-4 h-4 rounded-full"
+                                        style={{ backgroundColor: COLORS[item.status] }}
+                                    />
+                                    <span className="text-sm font-medium text-text whitespace-nowrap">
+                                        {item.name}
+                                    </span>
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* Chart */}
+                        <div className="flex-1">
+                            <ResponsiveContainer width="100%" height={250}>
+                                <PieChart>
+                                    <Pie
+                                        data={ordersData}
+                                        cx="50%"
+                                        cy="50%"
+                                        labelLine={false}
+                                        label={renderCustomLabel}
+                                        outerRadius={110}
+                                        innerRadius={65}
+                                        fill="#8884d8"
+                                        dataKey="value"
+                                        paddingAngle={3}
+                                    >
+                                        {ordersData.map((entry, index) => (
+                                            <Cell key={`cell-${index}`} fill={COLORS[entry.status]} />
+                                        ))}
+                                    </Pie>
+                                    <Tooltip
+                                        content={({ active, payload }) => {
+                                            if (active && payload && payload.length) {
+                                                const data = payload[0];
+                                                return (
+                                                    <div className="bg-white px-4 py-2 rounded-lg shadow-lg border border-border">
+                                                        <p className="text-sm font-semibold text-text">{data.name}</p>
+                                                        <p className="text-sm font-bold" style={{ color: data.payload.fill }}>
+                                                            {data.value} طلب ({((data.value / totalOrders) * 100).toFixed(1)}%)
+                                                        </p>
+                                                    </div>
+                                                );
+                                            }
+                                            return null;
+                                        }}
+                                    />
+                                </PieChart>
+                            </ResponsiveContainer>
+                        </div>
+                    </div>
+
+                    {/* Statistics Summary */}
+                    <div className="grid grid-cols-2 gap-4">
+                        {ordersData.map((item) => (
+                            <div
+                                key={item.status}
+                                className="flex items-center justify-between p-3 rounded-lg bg-bg"
+                            >
+                                <div className="flex items-center gap-2">
+                                    <div
+                                        className="w-3 h-3 rounded-full"
+                                        style={{ backgroundColor: COLORS[item.status] }}
+                                    />
+                                    <span className="text-sm font-medium text-text">{item.name}</span>
+                                </div>
+                                <span className="text-lg font-bold text-text">{item.value}</span>
+                            </div>
+                        ))}
+                    </div>
+                </>
+            )}
         </Card>
     );
 }

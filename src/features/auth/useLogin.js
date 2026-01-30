@@ -24,7 +24,7 @@ function useLogin() {
 
         onError: (err) => {
             console.log(err);
-            toast.error("الايميل أو كلمة المرور غير صحيح");
+            toast.error("خطأ فى التسجيل او البيانات المدخلة");
         }
     })
 

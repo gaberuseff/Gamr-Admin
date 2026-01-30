@@ -18,7 +18,7 @@ function DashboardLayout() {
 
     if (isStatsPending || isOrdersStatusChartPending || isTopSellingProductsPending) return <div
         className="flex pt-40 justify-center"><Spinner size="lg" /></div>
-    if (statsError || ordersStatusChartError || topSellingProductsError) return <Error message={statsError.message || ordersStatusChartError.message || topSellingProductsError.message} />
+    if (statsError || ordersStatusChartError || topSellingProductsError) return <Error message={statsError?.message || ordersStatusChartError?.message || topSellingProductsError?.message} />
 
     return (
         <div className="flex flex-col gap-4">
@@ -27,7 +27,7 @@ function DashboardLayout() {
             </div>
             <Stats stats={stats} />
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <TopSellingProductsChart
                     topSellingProducts={topSellingProducts}
                     onLimitChange={setProductsLimit}

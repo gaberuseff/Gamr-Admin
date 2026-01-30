@@ -5,11 +5,13 @@ import { Toaster } from "react-hot-toast";
 import AppRoutes from "./AppRoutes";
 import useOrdersRealtime from "./features/orders/useOrdersRealtime";
 import { NewOrdersProvider } from "./contexts/NewOrdersContext";
+import { ErrorBoundary } from "react-error-boundary";
+import ErrorFallback from "./ui/ErrorFallback";
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 1000 * 60 * 10,
+      staleTime: 1000 * 60 * 10, // 10 minutes
     },
   },
 });
@@ -37,13 +39,21 @@ function AppContent() {
 
 function App() {
   return (
-    <HeroUIProvider>
-      <QueryClientProvider client={queryClient}>
-        <NewOrdersProvider>
-          <AppContent />
-        </NewOrdersProvider>
-      </QueryClientProvider>
-    </HeroUIProvider>
+    <ErrorBoundary
+      FallbackComponent={ErrorFallback}
+      onReset={() => window.location.href = '/dashboard'}
+      onError={(error, errorInfo) => {
+        console.error('Error caught by boundary:', error, errorInfo);
+      }}
+    >
+      <HeroUIProvider>
+        <QueryClientProvider client={queryClient}>
+          <NewOrdersProvider>
+            <AppContent />
+          </NewOrdersProvider>
+        </QueryClientProvider>
+      </HeroUIProvider>
+    </ErrorBoundary>
   );
 }
 
