@@ -44,9 +44,7 @@ function useOrdersRealtime() {
                     schema: "public",
                     table: "orders",
                 },
-                (payload) => {
-                    console.log("New order received:", payload);
-
+                () => {
                     // Play notification sound
                     playNotificationSound();
 

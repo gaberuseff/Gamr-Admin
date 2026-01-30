@@ -16,7 +16,10 @@ function useOrders() {
     } = useQuery({
         queryKey: ["orders", status, sortBy, search, currentPage],
         queryFn: () => getOrders({ status, sortBy, search, page: currentPage }),
-        placeholderData: keepPreviousData, // ✅ Updated from deprecated keepPreviousData option
+        placeholderData: keepPreviousData,
+        staleTime: 0,
+        refetchOnMount: true,
+        refetchOnWindowFocus: true,
     });
 
     return {
