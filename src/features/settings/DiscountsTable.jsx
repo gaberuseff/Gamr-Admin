@@ -41,14 +41,6 @@ const columns = [
         label: "الحد الأدنى للطلب",
     },
     {
-        key: "max_discount_amount",
-        label: "الحد الأقصى للخصم",
-    },
-    {
-        key: "start_date",
-        label: "تاريخ البدء",
-    },
-    {
         key: "end_date",
         label: "تاريخ الانتهاء",
     },
@@ -107,10 +99,8 @@ function DiscountsTable() {
                     : `${cellValue} جنيه`;
 
             case "min_order_amount":
-            case "max_discount_amount":
                 return cellValue ? `${cellValue} جنيه` : "-";
 
-            case "start_date":
             case "end_date":
                 return cellValue ? new Date(cellValue).toLocaleDateString('ar-EG') : "-";
 

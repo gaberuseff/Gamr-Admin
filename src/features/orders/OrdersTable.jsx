@@ -16,6 +16,7 @@ import { useNavigate } from "react-router-dom";
 import Center from "../../ui/Center";
 import { formateCurrency } from "../../utils/helpers";
 import useOrders from "./useOrders";
+import DeleteOrdersBtn from "./DeleteOrdersBtn";
 
 export const columns = [
     { name: "رقم الطلب", uid: "id" },
@@ -66,15 +67,17 @@ function OrdersTable() {
                 );
             case "isPaid":
                 return (
-                    <Chip
-                        className="capitalize"
-                        color={order.isPaid ? "success" : "danger"}
-                        size="sm"
-                        variant="flat"
-                    >
-                        {order.isPaid ? "مدفوع" : "غير مدفوع"}
-                    </Chip>
-                );
+                    <div className="flex items-center gap-2">
+                        <Chip
+                            className="capitalize"
+                            color={order.isPaid === true ? "success" : "danger"}
+                            size="sm"
+                            variant="flat"
+                        >
+                            {order.isPaid === true ? "مدفوع" : "غير مدفوع"}
+                        </Chip>
+                    </div>
+                )
             case "status":
                 return (
                     <Chip
@@ -139,7 +142,9 @@ function OrdersTable() {
                 </TableBody>
             </Table>
 
-            <div className="flex justify-end items-center gap-4 px-12">
+            <div className="flex justify-between items-center">
+                <DeleteOrdersBtn />
+
                 <Pagination
                     color="primary"
                     page={currentPage}

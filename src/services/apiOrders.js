@@ -8,7 +8,7 @@ export async function getOrders({ status, sortBy, page = 1, search } = {}) {
     const from = (page - 1) * ORDERS_PER_PAGE;
     const to = from + ORDERS_PER_PAGE - 1;
 
-    let url = `${SUPABASE_URL}/rest/v1/orders?select=id,phone,customer_name,total,status,created_at,total`;
+    let url = `${SUPABASE_URL}/rest/v1/orders?select=id,phone,customer_name,total,status,created_at,isPaid`;
 
     // Add status filter if provided
     if (status && status !== "all") {

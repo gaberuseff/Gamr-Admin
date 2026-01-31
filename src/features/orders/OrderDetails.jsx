@@ -30,8 +30,8 @@ function OrderDetails() {
         return <OrderNotFound />
     }
 
-    function handleUpdateOrder(status) {
-        updateOrder({ id: order.id, data: { status } });
+    function handleUpdateOrder(field, value) {
+        updateOrder({ id: order.id, data: { [field]: value } });
     }
 
     return (
@@ -67,7 +67,7 @@ function OrderDetails() {
                         <Button color="primary"
                             isDisabled={order.status === "shipped"
                                 || order.status === "cancelled"}
-                            onPress={() => handleUpdateOrder("confirmed")}
+                            onPress={() => handleUpdateOrder("status", "confirmed")}
                             isLoading={isLoadingUpdateOrder}
                         >
                             تأكيد الطلب
@@ -77,7 +77,7 @@ function OrderDetails() {
                             <Button color="primary"
                                 isDisabled={order.status === "shipped"
                                     || order.status === "cancelled"}
-                                onPress={() => handleUpdateOrder("shipped")}
+                                onPress={() => handleUpdateOrder("status", "shipped")}
                                 isLoading={isLoadingUpdateOrder}
                             >
                                 تأكيد التسليم
@@ -93,7 +93,9 @@ function OrderDetails() {
                                         || order.status === "cancelled"}>تم الإلغاء</Button>
                                 ) : (
                                     <Button color="primary" isDisabled={order.status === "shipped"
-                                        || order.status === "cancelled"}>تأكيد الطلب</Button>
+                                        || order.status === "cancelled"}
+                                        onPress={() => handleUpdateOrder("status", "received")}
+                                        isLoading={isLoadingUpdateOrder}>تأكيد الطلب</Button>
                                 )
                             )
                         )
@@ -101,9 +103,17 @@ function OrderDetails() {
                 }
 
                 <Button color="danger" isDisabled={order.status === "shipped" || order.status === "cancelled"}
-                    onPress={() => handleUpdateOrder("cancelled")}
+                    onPress={() => handleUpdateOrder("status", "cancelled")}
                     isLoading={isLoadingUpdateOrder}
                 >إلغاء الطلب</Button>
+
+                {
+                    order.isPaid ? (
+                        <Button color="success" isDisabled={order.isPaid === true}>تم الدفع</Button>
+                    ) : (
+                        <Button color="danger" onPress={() => handleUpdateOrder("isPaid", true)} isLoading={isLoadingUpdateOrder}>تأكيد الدفع</Button>
+                    )
+                }
             </div>
         </div>
     )

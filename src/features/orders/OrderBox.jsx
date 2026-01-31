@@ -1,4 +1,4 @@
-import { Accordion, AccordionItem, Card, CardBody } from "@heroui/react";
+import { Accordion, AccordionItem, Card, CardBody, Chip } from "@heroui/react";
 import { HiShoppingCart } from "react-icons/hi";
 import { formateCurrency } from "../../utils/helpers";
 
@@ -27,7 +27,7 @@ function OrderBox({ order }) {
                                         </div>
                                         <div className="flex flex-col items-center">
                                             <span className="text-tiny text-default-400">سعر الوحدة</span>
-                                            <span className="text-small font-semibold">{item.price}</span>
+                                            <span className="text-small font-semibold">{item.unitPrice}</span>
                                         </div>
                                         <div className="flex flex-col items-end">
                                             <span className="text-tiny text-default-400">المجموع</span>
@@ -41,6 +41,25 @@ function OrderBox({ order }) {
                 </Accordion>
 
                 <div className="pt-6 border-t border-default-100">
+                    <div className="flex justify-between items-center mb-4">
+                        <span className="text-medium">حالة الدفع:</span>
+                        <Chip
+                            className="capitalize"
+                            color={order.isPaid ? "success" : "danger"}
+                            size="sm"
+                            variant="flat"
+                        >
+                            {order.isPaid ? "مدفوع" : "غير مدفوع"}
+                        </Chip>
+                    </div>
+                    <div className="flex justify-between items-center mb-2">
+                        <span className="text-medium">كود الخصم:</span>
+                        <span className={`text-sm font-semibold ${order.discount_code ? "bg-primary-50 text-primary px-3 py-1 rounded-full" : "text-default-400"}`}>{order.discount_code || "لا يوجد"}</span>
+                    </div>
+                    <div className="flex justify-between items-center mb-2">
+                        <span className="text-medium">قيمة الخصم:</span>
+                        <span className={`text-sm font-semibold ${order.discount ? "bg-primary-50 text-primary px-3 py-1 rounded-full" : "text-default-400"}`}>{order.discount || "لا يوجد"}</span>
+                    </div>
                     <div className="flex justify-between items-center mb-2">
                         <span className="text-medium">المجموع الفرعي:</span>
                         <span className="text-medium font-semibold">{formateCurrency(order.sub_total)}</span>

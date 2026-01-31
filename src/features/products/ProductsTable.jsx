@@ -211,7 +211,7 @@ function ProductsTable() {
                 </TableBody>
             </Table>
 
-            <div className="flex justify-end items-center gap-4 px-12">
+            <div className="flex justify-end">
                 <Pagination
                     color="primary"
                     page={currentPage}

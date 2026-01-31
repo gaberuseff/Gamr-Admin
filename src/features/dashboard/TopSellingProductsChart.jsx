@@ -16,8 +16,7 @@ function TopSellingProductsChart({ topSellingProducts, onLimitChange, currentLim
     const yAxisMax = Math.ceil(maxValue * 1.2); // إضافة 20% مساحة فوق أعلى قيمة
 
     return (
-        <Card shadow="none" className="px-6 py-6 bg-white h-full flex flex-col">
-            {/* Header with Select */}
+        <Card shadow="none" className="px-6 py-6 bg-white flex flex-col">
             <div className="flex items-center justify-between mb-6">
                 <div>
                     <h2 className="text-2xl font-bold text-text mb-1">المنتجات الأكثر مبيعاً</h2>
@@ -30,11 +29,11 @@ function TopSellingProductsChart({ topSellingProducts, onLimitChange, currentLim
                     placeholder="اختر"
                     selectedKeys={[String(currentLimit)]}
                     onChange={(e) => onLimitChange(Number(e.target.value))}
-                    className="w-36"
+                    className="w-40"
                     size="sm"
                     variant="bordered"
                     classNames={{
-                        trigger: "h-12",
+                        trigger: "h-10",
                     }}
                 >
                     {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
@@ -46,7 +45,7 @@ function TopSellingProductsChart({ topSellingProducts, onLimitChange, currentLim
             </div>
 
             {/* Chart - يأخذ باقي المساحة المتاحة */}
-            <div className="flex-1 min-h-0">
+            <div className="h-[400px] lg:h-auto lg:flex-1 min-h-0">
                 {chartData.length === 0 ? (
                     <div className="flex items-center justify-center h-full">
                         <div className="text-center">

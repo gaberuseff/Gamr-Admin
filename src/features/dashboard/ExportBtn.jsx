@@ -73,7 +73,7 @@ function ExportBtn() {
                 </Button>
             </div>
 
-            <Modal backdrop="blur" isOpen={isOpen} onClose={handleClose} size="xl">
+            <Modal backdrop="blur" isOpen={isOpen} onClose={handleClose} size="xl" className="py-4">
                 <ModalContent>
                     {(onClose) => (
                         <>

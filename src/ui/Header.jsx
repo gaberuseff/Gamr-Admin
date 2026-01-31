@@ -6,7 +6,7 @@ import Navigation from "./Navigation";
 function Header() {
   return (
     <div className="py-4 px-6 flex items-center justify-between">
-      <div className="flex items-center space-x-7">
+      <div className="flex items-center lg:space-x-7">
         <Logo />
         <Navigation />
       </div>
