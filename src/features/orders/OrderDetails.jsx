@@ -108,10 +108,10 @@ function OrderDetails() {
                 >إلغاء الطلب</Button>
 
                 {
-                    order.isPaid ? (
-                        <Button color="success" isDisabled={order.isPaid === true}>تم الدفع</Button>
+                    order.is_paid ? (
+                        <Button color="success" isDisabled={order.is_paid === true}>تم الدفع</Button>
                     ) : (
-                        <Button color="danger" onPress={() => handleUpdateOrder("isPaid", true)} isLoading={isLoadingUpdateOrder}>تأكيد الدفع</Button>
+                        <Button color="danger" onPress={() => handleUpdateOrder("is_paid", true)} isLoading={isLoadingUpdateOrder}>تأكيد الدفع</Button>
                     )
                 }
             </div>
