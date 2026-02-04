@@ -10,7 +10,7 @@ function OrderBox({ order }) {
                     <AccordionItem key="1" aria-label="Accordion 1" title="منتجات الطلب:">
                         <div className="divide-y divide-default-100">
                             {order?.cart?.map((item) => (
-                                <div key={item.id} className="flex items-center justify-between py-4">
+                                <div key={`${item.id}-${item.size}`} className="flex items-center justify-between py-4">
                                     <div className="flex items-center gap-4">
                                         <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-50 text-primary">
                                             <HiShoppingCart size={20} />
@@ -45,11 +45,11 @@ function OrderBox({ order }) {
                         <span className="text-medium">حالة الدفع:</span>
                         <Chip
                             className="capitalize"
-                            color={order.isPaid ? "success" : "danger"}
+                            color={order.is_paid ? "success" : "danger"}
                             size="sm"
                             variant="flat"
                         >
-                            {order.isPaid ? "مدفوع" : "غير مدفوع"}
+                            {order.is_paid ? "مدفوع" : "غير مدفوع"}
                         </Chip>
                     </div>
                     <div className="flex justify-between items-center mb-2">
@@ -58,7 +58,11 @@ function OrderBox({ order }) {
                     </div>
                     <div className="flex justify-between items-center mb-2">
                         <span className="text-medium">قيمة الخصم:</span>
-                        <span className={`text-sm font-semibold ${order.discount ? "bg-primary-50 text-primary px-3 py-1 rounded-full" : "text-default-400"}`}>{order.discount || "لا يوجد"}</span>
+                        <span className={`text-sm font-semibold ${order?.discount_amount ? "bg-primary-50 text-primary px-3 py-1 rounded-full" : "text-default-400"}`}>{order.discount_amount || "لا يوجد"}</span>
+                    </div>
+                    <div className="flex justify-between items-center mb-2">
+                        <span className="text-medium">شحن مجانى؟</span>
+                        <span className={`text-sm font-semibold ${order.is_free_shipping ? "bg-primary-50 text-primary px-3 py-1 rounded-full" : "text-default-400"}`}>{order.free_shipping ? "نعم" : "لا"}</span>
                     </div>
                     <div className="flex justify-between items-center mb-2">
                         <span className="text-medium">المجموع الفرعي:</span>

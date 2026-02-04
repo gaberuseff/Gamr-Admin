@@ -1,7 +1,7 @@
-import { Form, Input, Button, Checkbox, Spinner, Card } from "@heroui/react";
+import { Button, Card, Checkbox, Form, Input, Spinner, Textarea } from "@heroui/react";
 import { useState } from "react";
-import useSettings from "./useSettings";
 import Center from "../../ui/Center";
+import useSettings from "./useSettings";
 import useUpdateSettings from "./useUpdateSettings";
 
 function SettingsForm() {
@@ -23,43 +23,51 @@ function SettingsForm() {
 
     if (isSettingsLoading) return <Center><Spinner /></Center>
 
-    const { shipping_price, free_shipping, is_working } = settings;
+    const { shipping_price, free_shipping, is_working, banner_text } = settings;
 
     return (
         <Card className="p-6" shadow="none">
             <Form
-                className="w-full max-w-md flex flex-col gap-4 "
+                className="w-full max-w-6xl flex flex-col gap-4 "
                 onReset={() => setAction("reset")}
                 onSubmit={handleSubmit}
             >
-                <Input
-                    isRequired
-                    errorMessage="سعر الشحن"
-                    label="سعر الشحن"
-                    labelPlacement="outside"
-                    name="shipping_price"
-                    placeholder="أدخل سعر الشحن"
-                    type="number"
-                    defaultValue={shipping_price}
-                />
-                <Input
-                    isRequired
-                    errorMessage="شحن مجانى"
-                    label="شحن مجانى"
-                    labelPlacement="outside"
-                    name="free_shipping"
-                    placeholder="مبلغ الشحن المجانى"
-                    type="number"
-                    defaultValue={free_shipping}
-                />
+                <div className="flex justify-between gap-4 w-full">
+                    <div className="flex flex-col gap-4 w-full">
+                        <Input
+                            isRequired
+                            errorMessage="سعر الشحن"
+                            label="سعر الشحن"
+                            labelPlacement="outside"
+                            name="shipping_price"
+                            placeholder="أدخل سعر الشحن"
+                            type="number"
+                            defaultValue={shipping_price}
+                        />
+                        <Input
+                            isRequired
+                            errorMessage="شحن مجانى"
+                            label="شحن مجانى"
+                            labelPlacement="outside"
+                            name="free_shipping"
+                            placeholder="مبلغ الشحن المجانى"
+                            type="number"
+                            defaultValue={free_shipping}
+                        />
 
-                <Checkbox
-                    onValueChange={setIsWorking}
-                    name="is_working"
-                    defaultSelected={is_working}
-                >
-                    هل يعمل؟
-                </Checkbox>
+                        <Checkbox
+                            onValueChange={setIsWorking}
+                            name="is_working"
+                            defaultSelected={is_working}
+                        >
+                            هل يعمل؟
+                        </Checkbox>
+                    </div>
+
+                    <Textarea className="max-w-md" label="نص البانر" labelPlacement="outside"
+                        placeholder={`مثال: شحن مجانى عند الطلب بقيمة ${free_shipping || 999} جنيه`} name="banner_text" defaultValue={banner_text} />
+                </div>
+
                 <div className="flex gap-2">
                     <Button color="primary" type="submit" isLoading={isUpdatingSettings}>
                         حفظ

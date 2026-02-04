@@ -22,7 +22,7 @@ export const columns = [
     { name: "رقم الطلب", uid: "id" },
     { name: "العميل", uid: "customer", width: "200px" },
     { name: "المبلغ الكلي", uid: "total" },
-    { name: "حالة الدفع", uid: "isPaid" },
+    { name: "حالة الدفع", uid: "is_paid" },
     { name: "الحالة", uid: "status" },
     { name: "الإجراءات", uid: "actions" },
 ];
@@ -49,32 +49,32 @@ function OrdersTable() {
             case "id":
                 return (
                     <div>
-                        <p className="font-semibold text-sm">{order.id}</p>
+                        <p className="font-semibold text-sm">{order?.id}</p>
                     </div>
                 );
             case "customer":
                 return (
                     <div className="max-w-[200px] text-right">
-                        <p className="font-semibold text-sm truncate" title={order.customer_name}>{order.customer_name}</p>
-                        <p className="text-sm text-default-400 truncate" title={order.phone}>{order.phone}</p>
+                        <p className="font-semibold text-sm truncate" title={order?.customer_name}>{order?.customer_name}</p>
+                        <p className="text-sm text-default-400 truncate" title={order?.phone_number}>{order?.phone_number}</p>
                     </div>
                 );
             case "total":
                 return (
                     <div className="flex flex-col">
-                        <p className="font-semibold text-sm">{formateCurrency(order.total)}</p>
+                        <p className="font-semibold text-sm">{formateCurrency(order?.total)}</p>
                     </div>
                 );
-            case "isPaid":
+            case "is_paid":
                 return (
                     <div className="flex items-center gap-2">
                         <Chip
                             className="capitalize"
-                            color={order.isPaid === true ? "success" : "danger"}
+                            color={order?.is_paid === true ? "success" : "danger"}
                             size="sm"
                             variant="flat"
                         >
-                            {order.isPaid === true ? "مدفوع" : "غير مدفوع"}
+                            {order?.is_paid === true ? "مدفوع" : "غير مدفوع"}
                         </Chip>
                     </div>
                 )
@@ -82,7 +82,7 @@ function OrdersTable() {
                 return (
                     <Chip
                         className="capitalize"
-                        color={statusColorMap[order.status] || "default"}
+                        color={statusColorMap[order?.status] || "default"}
                         size="sm"
                         variant="flat"
                     >

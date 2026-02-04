@@ -13,19 +13,26 @@ function CustomerData({ order }) {
         {
             id: 2,
             label: "رقم الهاتف",
-            value: order.phone,
+            value: order.phone_number,
             icon: HiPhone,
             color: "from-purple-500 to-pink-500"
         },
         {
             id: 3,
             label: "العنوان",
-            value: order.address,
+            value: order?.address,
             icon: HiLocationMarker,
             color: "from-orange-500 to-red-500"
         },
         {
             id: 4,
+            label: "المحافظة",
+            value: order?.gov,
+            icon: HiLocationMarker,
+            color: "from-orange-500 to-red-500"
+        },
+        {
+            id: 5,
             label: "البريد الالكتروني",
             value: order.email,
             icon: HiMail,
