@@ -24,7 +24,7 @@ export async function getOrders({ status, sortBy, page = 1, search } = {}) {
 
         if (isNumeric) {
             // Search in phone column only (phone numbers are numeric)
-            url += `&phone=like.*${searchValue}*`;
+            url += `&phone_number=like.*${searchValue}*`;
         } else {
             // Search in id column only (order IDs contain letters and numbers)
             url += `&id=like.*${searchValue}*`;
