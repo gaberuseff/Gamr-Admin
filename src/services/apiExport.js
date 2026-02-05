@@ -4,7 +4,7 @@ const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
 const SUPABASE_KEY = import.meta.env.VITE_SUPABASE_KEY;
 
 export async function getOrdersForExport({ startDate, endDate }) {
-    let url = `${SUPABASE_URL}/rest/v1/orders?select=id,phone,customer_name,total,status,created_at`;
+    let url = `${SUPABASE_URL}/rest/v1/orders?select=id,phone_number,customer_name,total,status,created_at`;
 
     // Add date range filter
     url += `&created_at=gte.${startDate}&created_at=lte.${endDate}`;
