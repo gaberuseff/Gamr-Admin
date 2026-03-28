@@ -4,7 +4,6 @@ import { authStorage } from "../utils/authStorage";
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
 const SUPABASE_KEY = import.meta.env.VITE_SUPABASE_KEY;
 
-
 export const createUser = async (userData) => {
     const { email, password, role, name, phone } = userData;
 

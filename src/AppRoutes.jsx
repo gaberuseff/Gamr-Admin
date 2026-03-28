@@ -1,4 +1,4 @@
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
 import LoginForm from "./features/auth/LoginForm";
 import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
@@ -17,9 +17,12 @@ function AppRoutes() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<ProtectedRoutes>
-          <AppLayout />
-        </ProtectedRoutes>}>
+        <Route
+          element={
+            <ProtectedRoutes>
+              <AppLayout />
+            </ProtectedRoutes>
+          }>
           <Route index element={<Navigate replace to="dashboard" />} />
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="products" element={<Products />} />
@@ -27,18 +30,24 @@ function AppRoutes() {
           <Route path="orders/:orderId" element={<Order />} />
           <Route path="settings" element={<Settings />} />
           <Route path="profile" element={<Profile />} />
-          <Route path="users" element={
-            <AdminOnlyRoute>
-              <Users />
-            </AdminOnlyRoute>
-          } />
+          <Route
+            path="users"
+            element={
+              <AdminOnlyRoute>
+                <Users />
+              </AdminOnlyRoute>
+            }
+          />
         </Route>
 
-        <Route path="login" element={
-          <PublicRoute>
-            <LoginForm />
-          </PublicRoute>
-        } />
+        <Route
+          path="login"
+          element={
+            <PublicRoute>
+              <LoginForm />
+            </PublicRoute>
+          }
+        />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

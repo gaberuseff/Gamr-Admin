@@ -29,6 +29,7 @@ function LoginForm() {
           name="email"
           placeholder="ادخل الايميل الخاص بك"
           type="email"
+          defaultValue="test@example.com"
           disabled={isLoginPending}
         />
 
@@ -40,6 +41,7 @@ function LoginForm() {
           name="password"
           placeholder="ادخل كلمة المرور الخاصة بك"
           type="password"
+          defaultValue="123456"
           disabled={isLoginPending}
         />
         <div className="flex gap-2 mt-6 w-full">
